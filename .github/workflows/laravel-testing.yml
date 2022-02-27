@@ -1,7 +1,9 @@
 name: Laravel Testing
 
 on:
-  pull_request:
+  issue_comment:
+    types:
+      - created
 
 jobs:
   laravel-testing:
@@ -40,6 +42,7 @@ jobs:
         run: |
           docker-compose exec -T app cp .env.example .env
           docker-compose exec -T app php artisan key:generate
+          docker-compose exec -T app php artisan config:clear
 
       - name: Laravel Migrate Testing
         run: docker-compose exec -T app php artisan migrate
