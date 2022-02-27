@@ -3,4 +3,4 @@ services:
   app:
     build: ./infra/php
     volumes:
-      - /src:/data
+      - ./src:/data
