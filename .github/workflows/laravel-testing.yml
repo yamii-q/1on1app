@@ -1,6 +1,7 @@
 name: Laravel Testing
 
-on: [ workflow_dispatch ]
+on:
+  push:
 
 jobs:
   laravel-testing:
