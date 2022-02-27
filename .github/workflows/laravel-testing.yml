@@ -1,7 +1,7 @@
 name: Laravel Testing
 
 on:
-  push:
+  pull_request:
 
 jobs:
   laravel-testing:
