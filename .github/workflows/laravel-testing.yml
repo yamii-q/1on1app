@@ -16,6 +16,23 @@ jobs:
       - name: Event2
         run: echo "${{ github.event_name }}"
 
+      - name: "Post Comment"
+        uses: actions/github-script@v3
+        env:
+          MESSAGE: |
+            デプロイを開始しました (名前:${{ steps.command.outputs.command-name }}, 引数:${{ steps.command.outputs.command-arguments }})
+            ブランチ: ${{ steps.comment-branch.outputs.head_ref }}
+            SHA: ${{ steps.comment-branch.outputs.head_sha }}
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: process.env.MESSAGE
+            })
+
 #      - name: Docker Version
 #        run: docker version
 #
