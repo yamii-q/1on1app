@@ -1,20 +1,13 @@
 name: Laravel Testing
 
-on:
-  push:
+on: [ workflow_dispatch ]
 
 jobs:
   laravel-testing:
-    if: github.event_name = 'issue_comment' &&
-        contains(github.event.comment.html_url, '/pull/') &&
-        startsWith(github.event.comment.body, '/deploy') )
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: checkout
-        run: echo "チェックアウトしました (${{ github.event.comment.body }})"
 
       - name: Docker Version
         run: docker version
